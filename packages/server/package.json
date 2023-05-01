@@ -1,9 +1,13 @@
 {
   "name": "server",
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "start": "yarn build && node dist/index.js",
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\""
   },
   "dependencies": {
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22",
     "rimraf": "^5.0.0",
     "typescript": "^5.0.4"
   }
