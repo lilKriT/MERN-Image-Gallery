@@ -1,6 +1,4 @@
 {
-  "name": "mern-image-gallery",
-  "version": "0.1.0",
-  "description": "An image gallery, created using MERN Stack.",
-  "author": "lilKriT"
+  "name": "MERN Image Gallery",
+  "packageManager": "yarn@3.5.1"
 }
