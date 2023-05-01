@@ -1,4 +1,10 @@
 {
   "name": "MERN Image Gallery",
-  "packageManager": "yarn@3.5.1"
+  "packageManager": "yarn@3.5.1",
+  "scripts": {
+    "server": "cd packages/server && yarn dev"
+  },
+  "workspaces": [
+    "packages/server"
+  ]
 }
