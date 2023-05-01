@@ -1,9 +1,10 @@
 {
   "name": "server",
   "scripts": {
-    "build": "yarn tsc"
+    "build": "rimraf dist && tsc"
   },
   "dependencies": {
+    "rimraf": "^5.0.0",
     "typescript": "^5.0.4"
   }
 }
