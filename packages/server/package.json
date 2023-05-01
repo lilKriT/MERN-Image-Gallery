@@ -1,0 +1,9 @@
+{
+  "name": "server",
+  "scripts": {
+    "build": "yarn tsc"
+  },
+  "dependencies": {
+    "typescript": "^5.0.4"
+  }
+}
