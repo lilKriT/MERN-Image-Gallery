@@ -4,7 +4,7 @@ import colors from "colors";
 
 const app = express();
 dotenv.config({ path: "../../.env" });
-const port = process.env.PORT || 5555;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(
