@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import userRoutes from "./routes/api/v1/userRoutes";
+import connectDB from "./config/db";
 
 // Basic config
 const app = express();
@@ -15,6 +16,9 @@ const router = express.Router();
 router.use("/api/v1/users", userRoutes);
 
 app.use(router);
+
+// Connect to DB
+connectDB();
 
 // Listening
 app.listen(port, () => {
