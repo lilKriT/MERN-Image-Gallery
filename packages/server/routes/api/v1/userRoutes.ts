@@ -7,7 +7,7 @@ import {
 
 const userRoutes = Router();
 userRoutes.post("/", registerUser);
-userRoutes.post("login", loginUser);
+userRoutes.post("/login", loginUser);
 userRoutes.get("/me", getMe);
 
 export default userRoutes;
