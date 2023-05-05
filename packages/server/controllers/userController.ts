@@ -37,7 +37,7 @@ const registerUser = expressAsyncHandler(
 
     if (user) {
       res.status(201).json({
-        id: user._id,
+        _id: user.id,
         name: user.name,
         email: user.email,
         // TODO: create token
@@ -46,9 +46,6 @@ const registerUser = expressAsyncHandler(
       res.status(400);
       throw new Error("Invalid User Data");
     }
-
-    console.log("Registering user");
-    res.status(200).send("Registering user");
   }
 );
 
@@ -56,8 +53,22 @@ const registerUser = expressAsyncHandler(
 // @route POST api/v1/users/login
 // @access Public
 const loginUser = expressAsyncHandler(async (req: Request, res: Response) => {
-  console.log("User Logged in");
-  res.status(200).send("Logging user in");
+  const { email, password } = req.body;
+
+  // Does user exist?
+  const user = await User.findOne({ email });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.status(200).json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      // TODO: add token
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid credentials");
+  }
 });
 
 // @desc Get user info
