@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import colors from "colors";
 import userRoutes from "./routes/api/v1/userRoutes";
 import connectDB from "./config/db";
+import errorHandler from "./middleware/errorHandler";
 
 // Basic config
 const app = express();
@@ -18,6 +19,7 @@ const router = express.Router();
 router.use("/api/v1/users", userRoutes);
 
 app.use(router);
+app.use(errorHandler); // does it matter where this is? yes it does.
 
 // Connect to DB
 connectDB();
