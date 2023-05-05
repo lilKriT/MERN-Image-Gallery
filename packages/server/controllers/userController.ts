@@ -28,6 +28,25 @@ const registerUser = expressAsyncHandler(
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Create user
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    if (user) {
+      res.status(201).json({
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        // TODO: create token
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid User Data");
+    }
+
     console.log("Registering user");
     res.status(200).send("Registering user");
   }
