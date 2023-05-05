@@ -10,6 +10,8 @@ dotenv.config({ path: "../../.env" });
 const port = process.env.PORT || 3000;
 
 // Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Routes
 const router = express.Router();
