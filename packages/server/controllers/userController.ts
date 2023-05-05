@@ -76,8 +76,15 @@ const loginUser = expressAsyncHandler(async (req: Request, res: Response) => {
 // @route POST api/v1/users/me
 // @access Private
 const getMe = expressAsyncHandler(async (req: Request, res: Response) => {
-  console.log("My info");
-  res.status(200).send("User information");
+  const user = await User.findById(req.body.id);
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
+  const { id, name, email } = user;
+  res.status(200).json({ id, name, email });
 });
 
 const generateToken = (id: string) => {
