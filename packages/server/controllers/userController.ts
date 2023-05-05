@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
+import * as jwt from "jsonwebtoken";
 import User from "../models/User";
 
 // @desc Register user
@@ -40,7 +41,7 @@ const registerUser = expressAsyncHandler(
         _id: user.id,
         name: user.name,
         email: user.email,
-        // TODO: create token
+        token: generateToken(user.id),
       });
     } else {
       res.status(400);
@@ -63,7 +64,7 @@ const loginUser = expressAsyncHandler(async (req: Request, res: Response) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      // TODO: add token
+      token: generateToken(user.id),
     });
   } else {
     res.status(400);
@@ -78,5 +79,9 @@ const getMe = expressAsyncHandler(async (req: Request, res: Response) => {
   console.log("My info");
   res.status(200).send("User information");
 });
+
+const generateToken = (id: string) => {
+  return jwt.sign({ id }, process.env.SECRET as string, { expiresIn: "30d" });
+};
 
 export { registerUser, loginUser, getMe };
