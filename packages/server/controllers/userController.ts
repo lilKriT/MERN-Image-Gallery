@@ -1,11 +1,28 @@
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
+import User from "../models/User";
 
 // @desc Register user
 // @route POST api/v1/users
 // @access Public
 const registerUser = expressAsyncHandler(
   async (req: Request, res: Response) => {
+    const { name, email, password } = req.body;
+
+    // Do we have all the info?
+    if (!name || !email || !password) {
+      res.status(400);
+      throw new Error("Please fill out all the fields");
+    }
+
+    // Does the user already exist?
+    const userExists = await User.findOne({ email });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("Username taken");
+    }
+
     console.log("Registering user");
     res.status(200).send("Registering user");
   }
