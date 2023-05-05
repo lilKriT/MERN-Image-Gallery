@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
+import bcrypt from "bcryptjs";
 import User from "../models/User";
 
 // @desc Register user
@@ -22,6 +23,10 @@ const registerUser = expressAsyncHandler(
       res.status(400);
       throw new Error("Username taken");
     }
+
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     console.log("Registering user");
     res.status(200).send("Registering user");
