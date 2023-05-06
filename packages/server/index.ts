@@ -25,7 +25,32 @@ const storageEngine = multer.diskStorage({
 
 const upload = multer({
   storage: storageEngine,
+  limits: {
+    fileSize: 1000000, // current limit: 1MB
+  },
+  fileFilter: (req, file, cb) => {
+    checkImageType(file, cb);
+  },
 });
+
+// Testing for file types
+import path from "path";
+// I should fix the typing here
+const checkImageType = (file: any, cb: any) => {
+  // Allowed extensions
+  const fileTypes = /jpeg|jpg|png|gif|svg/;
+
+  // Check extension names
+  const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+
+  const mimeType = fileTypes.test(file.mimeType);
+
+  if (mimeType && extName) {
+    return cb(null, true);
+  } else {
+    cb("You can only upload images!");
+  }
+};
 
 // Routes
 const router = express.Router();
