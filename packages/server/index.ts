@@ -16,11 +16,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Multer - temporarily here
-const diskStorage = multer.diskStorage({
+const storageEngine = multer.diskStorage({
   destination: "/images",
   filename: (req, file, cb) => {
     cb(null, `${file.originalname}`);
   },
+});
+
+const upload = multer({
+  storage: storageEngine,
 });
 
 // Routes
