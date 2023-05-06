@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Multer - temporarily here
 const storageEngine = multer.diskStorage({
-  destination: "/images",
+  destination: "./images",
   filename: (req, file, cb) => {
     cb(null, `${file.originalname}`);
   },
@@ -28,9 +28,9 @@ const upload = multer({
   limits: {
     fileSize: 1000000, // current limit: 1MB
   },
-  fileFilter: (req, file, cb) => {
-    checkImageType(file, cb);
-  },
+  // fileFilter: (req, file, cb) => {
+  //   checkImageType(file, cb);
+  // },
 });
 
 // Testing for file types
@@ -55,6 +55,16 @@ const checkImageType = (file: any, cb: any) => {
 // Routes
 const router = express.Router();
 router.use("/api/v1/users", userRoutes);
+
+// Adding image uploads
+router.post("/api/v1/image/single", upload.single("image"), (req, res) => {
+  console.log("Bang");
+  if (req.file) {
+    res.send("Single file uploaded");
+  } else {
+    res.status(400).send("Please send a valid image");
+  }
+});
 
 app.use(router);
 app.use(errorHandler); // does it matter where this is? yes it does. This has to be after router.
