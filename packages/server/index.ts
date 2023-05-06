@@ -4,6 +4,7 @@ import colors from "colors";
 import userRoutes from "./routes/api/v1/userRoutes";
 import connectDB from "./config/db";
 import errorHandler from "./middleware/errorHandler";
+import multer from "multer";
 
 // Basic config
 const app = express();
