@@ -15,12 +15,20 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Multer - temporarily here
+const diskStorage = multer.diskStorage({
+  destination: "/images",
+  filename: (req, file, cb) => {
+    cb(null, `${file.originalname}`);
+  },
+});
+
 // Routes
 const router = express.Router();
 router.use("/api/v1/users", userRoutes);
 
 app.use(router);
-app.use(errorHandler); // does it matter where this is? yes it does.
+app.use(errorHandler); // does it matter where this is? yes it does. This has to be after router.
 
 // Connect to DB
 connectDB();
