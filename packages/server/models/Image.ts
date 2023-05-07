@@ -6,6 +6,10 @@ const ImageSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a proper url"],
     },
+    alt: {
+      type: String,
+      required: [true, "Please add alternate text"],
+    },
   },
   {
     timestamps: true,
