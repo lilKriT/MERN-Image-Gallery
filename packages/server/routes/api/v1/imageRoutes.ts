@@ -5,10 +5,11 @@ import {
   removeImage,
 } from "../../../controllers/imageController";
 import protect from "../../../middleware/authMiddleware";
+import { upload } from "../../../config/multer";
 
 const imageRoutes = Router();
 imageRoutes.get("/", getImage);
-imageRoutes.post("/", protect, addImage);
+imageRoutes.post("/", protect, upload.single("image"), addImage);
 imageRoutes.delete("/", protect, removeImage);
 
 export default imageRoutes;

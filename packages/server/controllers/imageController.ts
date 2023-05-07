@@ -13,7 +13,13 @@ const getImage = expressAsyncHandler(async (req: Request, res: Response) => {
 // @route POST api/v1/image
 // @access Private
 const addImage = expressAsyncHandler(async (req: Request, res: Response) => {
-  res.status(200).json({ msg: "Adding image" });
+  //   res.status(200).json({ msg: "Adding image" });
+  console.log("Bang");
+  if (req.file) {
+    res.send("Single file uploaded");
+  } else {
+    res.status(400).send("Please send a valid image");
+  }
 });
 
 // @desc Remove Image
