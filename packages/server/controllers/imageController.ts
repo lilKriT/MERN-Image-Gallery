@@ -15,8 +15,8 @@ const addImage = () => {
 // @desc Remove Image
 // @route DELETE api/v1/image
 // @access Private
-const removeImage = () => {
+const deleteImage = () => {
   console.log("Removing image");
 };
 
-export { addImage, removeImage };
+export { getImage, addImage, deleteImage as removeImage };
