@@ -4,6 +4,7 @@ const ImageSchema = new mongoose.Schema(
   {
     url: {
       type: String,
+      unique: true,
       required: [true, "Please add a proper url"],
     },
     alt: {

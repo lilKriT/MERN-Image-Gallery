@@ -13,11 +13,21 @@ const getImage = expressAsyncHandler(async (req: Request, res: Response) => {
 // @route POST api/v1/image
 // @access Private
 const addImage = expressAsyncHandler(async (req: Request, res: Response) => {
-  //   res.status(200).json({ msg: "Adding image" });
-  if (req.file) {
+  if (!req.file) {
+    res.status(400);
+    throw new Error("Please send a valid image");
+  }
+
+  const image = await Image.create({
+    url: req.file.filename,
+    alt: "Temporary alt text",
+  });
+
+  if (image) {
     res.status(200).send("Single file uploaded");
   } else {
-    res.status(400).send("Please send a valid image");
+    res.status(400);
+    throw new Error("Something went wrong");
   }
 });
 
