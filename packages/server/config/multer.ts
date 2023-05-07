@@ -27,7 +27,7 @@ const checkImageType = (file: any, cb: any) => {
   // Check extension names
   const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
 
-  const mimeType = fileTypes.test(file.mimeType);
+  //   const mimeType = mimeTypes.test(file.mimeType);
 
   //   TODO: add checking for mimetype
   if (extName) {
