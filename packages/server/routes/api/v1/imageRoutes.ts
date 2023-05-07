@@ -10,3 +10,5 @@ const imageRoutes = Router();
 imageRoutes.get("/", getImage);
 imageRoutes.post("/", protect, addImage);
 imageRoutes.delete("/", protect, removeImage);
+
+export default imageRoutes;
