@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-lato;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply rounded-3xl px-4 py-2 flex font-bold;
+  }
+
+  .btn--primary {
+    @apply bg-cyan-600 border-2 border-cyan-600 text-white;
+  }
+
+  .btn--secondary {
+    @apply bg-transparent border-2 border-emerald-500;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply w-full max-w-5xl;
+  }
+}
