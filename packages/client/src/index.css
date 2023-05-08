@@ -10,15 +10,18 @@
 
 @layer components {
   .btn {
-    @apply rounded-3xl px-4 py-2 flex font-bold;
+    @apply rounded-3xl px-4 py-2 flex justify-center items-center font-bold;
+    @apply duration-300 ease-in-out;
   }
 
   .btn--primary {
     @apply bg-cyan-600 border-2 border-cyan-600 text-white;
+    @apply hover:bg-cyan-400 hover:border-cyan-400;
   }
 
   .btn--secondary {
-    @apply bg-transparent border-2 border-emerald-500;
+    @apply bg-transparent border-2 border-emerald-500 text-emerald-500;
+    @apply hover:bg-emerald-500 hover:text-white;
   }
 }
 
