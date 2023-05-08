@@ -967,6 +967,8 @@ __metadata:
 "MERN Image Gallery@workspace:.":
   version: 0.0.0-use.local
   resolution: "MERN Image Gallery@workspace:."
+  dependencies:
+    concurrently: ^8.0.1
   languageName: unknown
   linkType: soft
 

@@ -2,10 +2,15 @@
   "name": "MERN Image Gallery",
   "packageManager": "yarn@3.5.1",
   "scripts": {
-    "server": "cd packages/server && yarn dev"
+    "server": "cd packages/server && yarn dev",
+    "client": "cd packages/client && yarn dev",
+    "both": "concurrently \"yarn server\" \"yarn client\""
   },
   "workspaces": [
     "packages/server",
     "packages/client"
-  ]
+  ],
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
 }
