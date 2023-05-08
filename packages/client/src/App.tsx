@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <p>Basic app.</p>
+      <p className="text-blue-700">Tailwind installed!</p>
     </>
   );
 }
