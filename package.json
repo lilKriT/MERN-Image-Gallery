@@ -5,6 +5,7 @@
     "server": "cd packages/server && yarn dev"
   },
   "workspaces": [
-    "packages/server"
+    "packages/server",
+    "packages/client"
   ]
 }
