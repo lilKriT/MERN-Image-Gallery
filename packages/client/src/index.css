@@ -23,6 +23,10 @@
     @apply bg-transparent border-2 border-emerald-500 text-emerald-500;
     @apply hover:bg-emerald-500 hover:text-white;
   }
+
+  .inputField {
+    @apply border-b border-black/50 p-2 focus:shadow-lg shadow-black/30 rounded focus:outline-0;
+  }
 }
 
 @layer utilities {
