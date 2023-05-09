@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 const NewPic = () => {
+  const [image, setImage] = useState<string>("");
+
+  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Sending a pic");
@@ -14,9 +22,19 @@ const NewPic = () => {
           onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col gap-4 shadow-lg shadow-black/30 p-8 rounded-3xl mt-16"
         >
+          <img
+            src={image}
+            alt="Preview Image"
+            className="h-40 w-full object-contain"
+          />
           <label>
             Insert pic:
-            <input type="file" name="pic" id="pic" />
+            <input
+              type="file"
+              name="pic"
+              id="pic"
+              onChange={(e) => onImageChange(e)}
+            />
             <button className="btn btn--primary">Post picture</button>
           </label>
         </form>
