@@ -8,7 +8,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user, setUser, isFetching, setIsFetching } = useContext(AppContext);
+  const { user, setUser, isFetching, setIsFetching, error, setError } =
+    useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ const Login = () => {
       // Log In Start
       setUser(null);
       setIsFetching(true);
+      setError("");
 
       const res = await axios.post(`${url}/users/login`, {
         email,
@@ -28,10 +30,12 @@ const Login = () => {
       // Log In Success
       setUser(res.data);
       setIsFetching(false);
+      setError("");
     } catch (err) {
       // Log In Fail
       setUser(null);
       setIsFetching(false);
+      setError("Wrong Credentials");
     }
   };
 
