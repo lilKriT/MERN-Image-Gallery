@@ -26,9 +26,15 @@ const AppContext = createContext<IContext>({
 });
 
 const AppProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(
+    JSON.parse(localStorage.getItem("user") || "{}")
+  );
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <AppContext.Provider
