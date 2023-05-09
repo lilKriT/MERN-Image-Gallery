@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
+import cors from "cors";
 import userRoutes from "./routes/api/v1/userRoutes";
 import imageRoutes from "./routes/api/v1/imageRoutes";
 import connectDB from "./config/db";
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors({ origin: "http://localhost:5173" }));
 
 // Routes
 const router = express.Router();
@@ -32,11 +34,3 @@ app.listen(port, () => {
     colors.green.underline(`Image Gallery listening on port ${port}`)
   );
 });
-
-// TODO: router for users
-// TODO: router for images
-
-// TODO: connect to db
-
-// TODO: middleware for password
-// TOOD: middleware for errors
