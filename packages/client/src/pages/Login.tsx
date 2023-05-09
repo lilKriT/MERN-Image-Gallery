@@ -13,7 +13,6 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(`Login: ${login}, password: ${password}`);
 
     try {
       // Log In Start
@@ -26,7 +25,6 @@ const Login = () => {
         password,
       });
 
-      console.log(res.data);
       // Log In Success
       setUser(res.data);
       setIsFetching(false);
@@ -47,7 +45,7 @@ const Login = () => {
           onSubmit={(e) => handleSubmit(e)}
         >
           <h2>Insert your email and password</h2>
-          <h3>{user ? user.name : "no user"}</h3>
+          {/* Email */}
           <label className="flex flex-col gap-2">
             Email:
             <input
@@ -59,6 +57,8 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
+
+          {/* Password */}
           <label className="flex flex-col gap-2">
             Password:
             <input

@@ -3,9 +3,11 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { useContext } from "react";
+import { AppContext } from "./context/AppContext";
 
 function App() {
-  const user = false;
+  const { user } = useContext(AppContext);
 
   return (
     <>
