@@ -1,7 +1,10 @@
 import { createContext, useEffect, useState } from "react";
+import IUser from "../interfaces/IUser";
 
 interface IContext {
-  text: string;
+  // text: string;
+  user: IUser | null;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 }
 
 interface IProps {
@@ -9,12 +12,16 @@ interface IProps {
 }
 
 const AppContext = createContext<IContext>({
-  text: "Default Text",
+  // text: "Default Text",
+  user: null,
+  setUser: () => {},
 });
 
 const AppProvider = ({ children }: IProps) => {
+  const [user, setUser] = useState<IUser | null>(null);
+
   return (
-    <AppContext.Provider value={{ text: "Default Text 2" }}>
+    <AppContext.Provider value={{ user, setUser }}>
       {children}
     </AppContext.Provider>
   );

@@ -6,7 +6,7 @@ const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const { text } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Login = () => {
           onSubmit={(e) => handleSubmit(e)}
         >
           <h2>Insert your login and password</h2>
-          <h3>{text}</h3>
+          <h3>{user ? user.name : "no user"}</h3>
           <label className="flex flex-col gap-2">
             Login:
             <input
