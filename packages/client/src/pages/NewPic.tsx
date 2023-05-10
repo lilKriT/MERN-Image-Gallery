@@ -22,11 +22,14 @@ const NewPic = () => {
           onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col gap-4 shadow-lg shadow-black/30 p-8 rounded-3xl mt-16"
         >
-          <img
-            src={image}
-            alt="Preview Image"
-            className="h-40 w-full object-contain"
-          />
+          {image && (
+            <img
+              src={image}
+              alt="Preview Image"
+              className="h-40 w-full object-contain"
+            />
+          )}
+
           <label>
             Insert pic:
             <input
