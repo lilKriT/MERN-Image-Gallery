@@ -8,7 +8,8 @@ import { useContext } from "react";
 import { AppContext } from "./context/AppContext";
 
 function App() {
-  const { user } = useContext(AppContext);
+  const { state } = useContext(AppContext);
+  // const user = state.user;
 
   return (
     <>
@@ -16,9 +17,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={user ? <Home /> : <Login />} />
-          <Route path="/register" element={user ? <Home /> : <Register />} />
-          <Route path="/newpic" element={user ? <NewPic /> : <Login />} />
+          <Route path="/login" element={state.user ? <Home /> : <Login />} />
+          <Route
+            path="/register"
+            element={state.user ? <Home /> : <Register />}
+          />
+          <Route path="/newpic" element={state.user ? <NewPic /> : <Login />} />
         </Routes>
       </Router>
     </>

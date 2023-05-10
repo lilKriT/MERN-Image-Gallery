@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import { UserActionType } from "../context/UserReducer";
+import IUser from "../interfaces/IUser";
 
 const url = "http://localhost:3000/api/v1";
 
@@ -21,7 +22,7 @@ const Login = () => {
       // setIsFetching(true);
       // setError("");
 
-      dispatch({ type: UserActionType.login });
+      dispatch({ type: UserActionType.loginStart, payload: null });
 
       const res = await axios.post(`${url}/users/login`, {
         email,
@@ -32,11 +33,13 @@ const Login = () => {
       // setUser(res.data);
       // setIsFetching(false);
       // setError("");
+      dispatch({ type: UserActionType.loginSuccess, payload: res.data });
     } catch (err) {
       // Log In Fail
       // setUser(null);
       // setIsFetching(false);
       // setError("Wrong Credentials");
+      dispatch({ type: UserActionType.loginFail, payload: null });
     }
   };
 

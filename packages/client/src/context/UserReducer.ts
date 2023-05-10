@@ -1,13 +1,15 @@
 import IUser from "../interfaces/IUser";
 
 enum UserActionType {
-  login = "login",
+  loginStart = "loginStart",
+  loginSuccess = "loginSuccess",
+  loginFail = "loginFail",
   logout = "logout",
 }
 
 interface UserAction {
   type: UserActionType;
-  payload?: string;
+  payload: IUser | null;
 }
 
 interface UserState {
@@ -16,11 +18,26 @@ interface UserState {
   error: string;
 }
 
-const UserReducer = (state: UserState, action: UserAction) => {
+const UserReducer = (state: UserState, action: UserAction): UserState => {
   const { type, payload } = action;
   switch (type) {
-    case "login":
-      console.log("reducer login");
+    case "loginStart":
+      console.log("reducer login start");
+      return {
+        user: null,
+        isFetching: true,
+        error: "",
+      };
+    case "loginSuccess":
+      console.log("reducer login success");
+      return {
+        user: payload,
+        isFetching: false,
+        error: "",
+      };
+
+    case "loginFail":
+      console.log("reducer login fail");
       return state;
     case "logout":
       console.log("reducer logout");

@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { UserActionType } from "../context/UserReducer";
 
 const Header = () => {
-  const { user, setUser } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const handleLogout = () => {
-    setUser(null);
+    // setUser(null);
+    dispatch({ type: UserActionType.logout, payload: null });
   };
 
   return (
@@ -18,7 +20,7 @@ const Header = () => {
             <li>
               <Link to="/">View</Link>
             </li>
-            {user && (
+            {state.user && (
               <li>
                 <Link to="/newpic">Add</Link>
               </li>
@@ -27,7 +29,7 @@ const Header = () => {
         </nav>
         <nav className="flex">
           <menu className="flex gap-4">
-            {user ? (
+            {state.user ? (
               <li>
                 <button className="btn btn--primary" onClick={handleLogout}>
                   Log out
