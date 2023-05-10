@@ -43,7 +43,7 @@ const AppProvider = ({ children }: IProps) => {
   // const [error, setError] = useState("");
 
   const [state, dispatch] = useReducer(UserReducer, {
-    user: null,
+    user: JSON.parse(localStorage.getItem("user") || "{}"),
     isFetching: false,
     error: "",
   });

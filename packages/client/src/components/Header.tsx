@@ -7,7 +7,6 @@ const Header = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const handleLogout = () => {
-    // setUser(null);
     dispatch({ type: UserActionType.logout, payload: null });
   };
 

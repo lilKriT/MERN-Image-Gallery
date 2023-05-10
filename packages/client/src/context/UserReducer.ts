@@ -38,10 +38,18 @@ const UserReducer = (state: UserState, action: UserAction): UserState => {
 
     case "loginFail":
       console.log("reducer login fail");
-      return state;
+      return {
+        user: null,
+        isFetching: false,
+        error: "Can't log in!",
+      };
     case "logout":
       console.log("reducer logout");
-      return state;
+      return {
+        user: null,
+        isFetching: false,
+        error: "",
+      };
     default:
       console.log("reducer default");
       throw new Error(`Unknown action: ${type}`);

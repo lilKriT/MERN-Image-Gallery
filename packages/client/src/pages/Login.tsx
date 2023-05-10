@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import { UserActionType } from "../context/UserReducer";
-import IUser from "../interfaces/IUser";
 
 const url = "http://localhost:3000/api/v1";
 
