@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import IUser from "../interfaces/IUser";
+import UserReducer from "./UserReducer";
 
 interface IContext {
   // text: string;
@@ -26,15 +27,21 @@ const AppContext = createContext<IContext>({
 });
 
 const AppProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState<IUser | null>(
-    JSON.parse(localStorage.getItem("user") || "{}")
-  );
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState("");
+  // const [user, setUser] = useState<IUser | null>(
+  //   JSON.parse(localStorage.getItem("user") || "{}")
+  // );
+  // const [isFetching, setIsFetching] = useState(false);
+  // const [error, setError] = useState("");
+
+  const [state, dispatch] = useReducer(UserReducer, {
+    user: null,
+    isFetching: false,
+    error: "",
+  });
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+  }, [state.user]);
 
   return (
     <AppContext.Provider
