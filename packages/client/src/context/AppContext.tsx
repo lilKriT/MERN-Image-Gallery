@@ -13,7 +13,7 @@ import UserReducer, { UserAction, UserState } from "./UserReducer";
 // }
 
 interface IContext {
-  state: UserState | null;
+  state: UserState;
   dispatch: React.Dispatch<UserAction>;
 }
 
@@ -32,7 +32,7 @@ interface IProps {
 // });
 
 const AppContext = createContext<IContext>({
-  state: null,
+  state: { user: null, isFetching: false, error: "" },
   dispatch: () => {},
 });
 
@@ -54,9 +54,7 @@ const AppProvider = ({ children }: IProps) => {
   }, [state.user]);
 
   return (
-    <AppContext.Provider
-      value={{ user, setUser, isFetching, setIsFetching, error, setError }}
-    >
+    <AppContext.Provider value={{ state, dispatch }}>
       {children}
     </AppContext.Provider>
   );

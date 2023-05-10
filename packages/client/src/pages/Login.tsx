@@ -8,8 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user, setUser, isFetching, setIsFetching, error, setError } =
-    useContext(AppContext);
+  // const { user, isFetching, error } = useContext(AppContext).state;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
