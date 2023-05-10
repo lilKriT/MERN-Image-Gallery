@@ -10,13 +10,13 @@ interface UserAction {
   payload: string;
 }
 
-interface TempState {
+interface UserState {
   user: IUser | null;
   isFetching: boolean;
   error: string;
 }
 
-const UserReducer = (state: TempState, action: UserAction) => {
+const UserReducer = (state: UserState, action: UserAction) => {
   const { type, payload } = action;
   switch (type) {
     case "login":
@@ -31,4 +31,5 @@ const UserReducer = (state: TempState, action: UserAction) => {
   }
 };
 
-export default UserReducer;
+export { UserReducer as default };
+export type { UserState, UserAction };

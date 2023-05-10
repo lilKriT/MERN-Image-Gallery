@@ -1,29 +1,39 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import IUser from "../interfaces/IUser";
-import UserReducer from "./UserReducer";
+import UserReducer, { UserAction, UserState } from "./UserReducer";
+
+// interface IContext {
+//   // text: string;
+//   user: IUser | null;
+//   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+//   isFetching: boolean;
+//   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
+//   error: string;
+//   setError: React.Dispatch<React.SetStateAction<string>>;
+// }
 
 interface IContext {
-  // text: string;
-  user: IUser | null;
-  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
-  isFetching: boolean;
-  setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
-  error: string;
-  setError: React.Dispatch<React.SetStateAction<string>>;
+  state: UserState | null;
+  dispatch: React.Dispatch<UserAction>;
 }
 
 interface IProps {
   children: React.ReactNode;
 }
 
+// const AppContext = createContext<IContext>({
+//   // text: "Default Text",
+//   user: null,
+//   setUser: () => {},
+//   isFetching: false,
+//   setIsFetching: () => {},
+//   error: "",
+//   setError: () => {},
+// });
+
 const AppContext = createContext<IContext>({
-  // text: "Default Text",
-  user: null,
-  setUser: () => {},
-  isFetching: false,
-  setIsFetching: () => {},
-  error: "",
-  setError: () => {},
+  state: null,
+  dispatch: () => {},
 });
 
 const AppProvider = ({ children }: IProps) => {
@@ -40,7 +50,7 @@ const AppProvider = ({ children }: IProps) => {
   });
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);
 
   return (
