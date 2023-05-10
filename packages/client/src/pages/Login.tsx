@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
+import { UserActionType } from "../context/UserReducer";
 
 const url = "http://localhost:3000/api/v1";
 
@@ -9,15 +10,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   // const { user, isFetching, error } = useContext(AppContext).state;
+  const { state, dispatch } = useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      // Log In Start
-      setUser(null);
-      setIsFetching(true);
-      setError("");
+      // Log In Start - here or before try catch?
+      // setUser(null);
+      // setIsFetching(true);
+      // setError("");
+
+      dispatch({ type: UserActionType.login });
 
       const res = await axios.post(`${url}/users/login`, {
         email,
@@ -25,14 +29,14 @@ const Login = () => {
       });
 
       // Log In Success
-      setUser(res.data);
-      setIsFetching(false);
-      setError("");
+      // setUser(res.data);
+      // setIsFetching(false);
+      // setError("");
     } catch (err) {
       // Log In Fail
-      setUser(null);
-      setIsFetching(false);
-      setError("Wrong Credentials");
+      // setUser(null);
+      // setIsFetching(false);
+      // setError("Wrong Credentials");
     }
   };
 

@@ -7,7 +7,7 @@ enum UserActionType {
 
 interface UserAction {
   type: UserActionType;
-  payload: string;
+  payload?: string;
 }
 
 interface UserState {
@@ -31,5 +31,9 @@ const UserReducer = (state: UserState, action: UserAction) => {
   }
 };
 
-export { UserReducer as default };
-export type { UserState, UserAction };
+export {
+  UserReducer as default,
+  UserActionType,
+  type UserAction,
+  type UserState,
+};

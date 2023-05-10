@@ -1,5 +1,4 @@
 import { createContext, useEffect, useReducer, useState } from "react";
-import IUser from "../interfaces/IUser";
 import UserReducer, { UserAction, UserState } from "./UserReducer";
 
 // interface IContext {
