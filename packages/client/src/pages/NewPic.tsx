@@ -1,22 +1,37 @@
+import axios from "axios";
 import React, { useState } from "react";
 
+const url = "http://localhost:3000/api/v1";
+
 const NewPic = () => {
-  const [image, setImage] = useState<string>("");
+  const [previewImage, setPreviewImage] = useState<string>("");
+  const [file, setFile] = useState<File | null>();
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
+      setFile(e.target.files[0]);
+      setPreviewImage(URL.createObjectURL(e.target.files[0]));
     }
   };
 
   const onImageRemove = () => {
-    // console.log("Removing image");
-    setImage("");
+    setPreviewImage("");
+    setFile(null);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log("Sending a pic");
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("pic", file);
+      formData.append("name", "Some name");
+      const res = await axios.post(`${url}/images/`, formData);
+    } catch (error) {}
   };
 
   return (
@@ -27,10 +42,10 @@ const NewPic = () => {
           onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col gap-4 shadow-lg shadow-black/30 p-8 rounded-3xl mt-16"
         >
-          {image && (
+          {previewImage && (
             <>
               <img
-                src={image}
+                src={previewImage}
                 alt="Preview Image"
                 className="h-40 w-full object-contain"
               />
