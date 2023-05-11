@@ -1,11 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 
 const url = "http://localhost:3000/api/v1";
 
 const NewPic = () => {
   const [previewImage, setPreviewImage] = useState<string>("");
   const [file, setFile] = useState<File | null>();
+
+  const { state, dispatch } = useContext(AppContext);
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -30,7 +33,14 @@ const NewPic = () => {
       const formData = new FormData();
       formData.append("pic", file);
       formData.append("name", "Some name");
-      const res = await axios.post(`${url}/images/`, formData);
+
+      const headers = {
+        Authorization: `Bearer ${state.user?.token}`,
+      };
+
+      const res = await axios.post(`${url}/images/`, formData, {
+        headers,
+      });
     } catch (error) {}
   };
 
