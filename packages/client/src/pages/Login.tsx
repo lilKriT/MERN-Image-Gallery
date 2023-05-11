@@ -9,18 +9,12 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const { user, isFetching, error } = useContext(AppContext).state;
   const { state, dispatch } = useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      // Log In Start - here or before try catch?
-      // setUser(null);
-      // setIsFetching(true);
-      // setError("");
-
       dispatch({ type: UserActionType.loginStart, payload: null });
 
       const res = await axios.post(`${url}/users/login`, {
@@ -28,16 +22,8 @@ const Login = () => {
         password,
       });
 
-      // Log In Success
-      // setUser(res.data);
-      // setIsFetching(false);
-      // setError("");
       dispatch({ type: UserActionType.loginSuccess, payload: res.data });
     } catch (err) {
-      // Log In Fail
-      // setUser(null);
-      // setIsFetching(false);
-      // setError("Wrong Credentials");
       dispatch({ type: UserActionType.loginFail, payload: null });
     }
   };

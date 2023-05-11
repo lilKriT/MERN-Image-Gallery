@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
+import { UserActionType } from "../context/UserReducer";
 
 const url = "http://localhost:3000/api/v1";
 
@@ -9,16 +10,21 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser, setIsFetching, setError } = useContext(AppContext);
+  // const { setUser, setIsFetching, setError } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       // Register start
-      setUser(null);
-      setIsFetching(true);
-      setError("");
+      // setUser(null);
+      // setIsFetching(true);
+      // setError("");
+      dispatch({
+        type: UserActionType.loginStart,
+        payload: null,
+      });
 
       const res = await axios.post(`${url}/users/`, {
         name,
@@ -26,16 +32,18 @@ const Register = () => {
         password,
       });
 
-      console.log(res.data);
+      // console.log(res.data);
       // Register success
-      setUser(res.data);
-      setIsFetching(false);
-      setError("");
+      // setUser(res.data);
+      // setIsFetching(false);
+      // setError("");
+      dispatch({ type: UserActionType.loginSuccess, payload: res.data });
     } catch (err) {
       // Register fail
-      setUser(null);
-      setIsFetching(false);
-      setError("Can't register");
+      // setUser(null);
+      // setIsFetching(false);
+      // setError("Can't register");
+      dispatch({ type: UserActionType.loginFail, payload: null });
     }
   };
 
