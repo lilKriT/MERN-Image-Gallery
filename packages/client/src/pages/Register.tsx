@@ -18,9 +18,6 @@ const Register = () => {
 
     try {
       // Register start
-      // setUser(null);
-      // setIsFetching(true);
-      // setError("");
       dispatch({
         type: UserActionType.loginStart,
         payload: null,
@@ -32,17 +29,10 @@ const Register = () => {
         password,
       });
 
-      // console.log(res.data);
       // Register success
-      // setUser(res.data);
-      // setIsFetching(false);
-      // setError("");
       dispatch({ type: UserActionType.loginSuccess, payload: res.data });
     } catch (err) {
       // Register fail
-      // setUser(null);
-      // setIsFetching(false);
-      // setError("Can't register");
       dispatch({ type: UserActionType.loginFail, payload: null });
     }
   };
