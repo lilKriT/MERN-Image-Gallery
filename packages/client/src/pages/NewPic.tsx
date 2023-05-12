@@ -31,11 +31,12 @@ const NewPic = () => {
 
     try {
       const formData = new FormData();
-      formData.append("pic", file);
+      formData.append("image", file);
       formData.append("name", "Some name");
 
       const headers = {
         Authorization: `Bearer ${state.user?.token}`,
+        "Content-Type": "multipart/form-data",
       };
 
       const res = await axios.post(`${url}/images/`, formData, {

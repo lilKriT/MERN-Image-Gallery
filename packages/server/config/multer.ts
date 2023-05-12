@@ -1,7 +1,7 @@
 import multer from "multer";
 
 const storageEngine = multer.diskStorage({
-  destination: "./images", // Is this correct still?
+  destination: "./public/images", // Is this correct still?
   filename: (req, file, cb) => {
     cb(null, `${file.originalname}`);
   },
@@ -15,7 +15,7 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     checkImageType(file, cb);
   },
-});
+}).single("image");
 
 // Testing for file types
 import path from "path";
