@@ -25,6 +25,10 @@ router.use("/api/v1/images", imageRoutes);
 app.use(router);
 app.use(errorHandler); // does it matter where this is? yes it does. This has to be after router.
 
+// Static images
+import path from "path";
+app.use(express.static(path.join(__dirname, "..", "public"))); // I need to use .. because of TS!
+
 // Connect to DB
 connectDB();
 

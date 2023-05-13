@@ -11,7 +11,14 @@ const ImagesDisplay = ({ images }: IImagesDisplay) => {
       <h2>Images:</h2>
       <div className="bg-slate-200">
         {images.map((image, idx) => (
-          <div>image goes here</div>
+          <div>
+            {image.url}
+            <img src={``} alt="" />
+            <p>
+              heres the image{" "}
+              {`http://localhost:3000/public/images/${image.url}`}
+            </p>
+          </div>
         ))}
       </div>
     </div>
