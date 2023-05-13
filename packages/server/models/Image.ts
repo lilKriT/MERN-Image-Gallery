@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
+import User from "./User";
 
 const ImageSchema = new mongoose.Schema(
   {
+    owner: {
+      type: mongoose.Types.ObjectId,
+      ref: User,
+      required: [true, "Please add a user"],
+    },
     url: {
       type: String,
       unique: true,

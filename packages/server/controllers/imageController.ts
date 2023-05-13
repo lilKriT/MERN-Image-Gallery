@@ -18,9 +18,12 @@ const addImage = expressAsyncHandler(async (req: Request, res: Response) => {
     throw new Error("Please send a valid image");
   }
 
+  // console.log(req.body);
+
   const image = await Image.create({
+    owner: req.body.user,
     url: req.file.filename,
-    alt: "Temporary alt text",
+    alt: req.body.alternate,
   });
 
   if (image) {

@@ -7,6 +7,7 @@ const url = "http://localhost:3000/api/v1";
 const NewPic = () => {
   const [previewImage, setPreviewImage] = useState<string>("");
   const [file, setFile] = useState<File | null>();
+  const [alternate, setAlternate] = useState("");
 
   const { state, dispatch } = useContext(AppContext);
 
@@ -29,10 +30,15 @@ const NewPic = () => {
       return;
     }
 
+    if (!state.user) {
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("image", file);
-      formData.append("name", "Some name");
+      formData.append("user", state.user._id);
+      formData.append("alternate", alternate);
 
       const headers = {
         Authorization: `Bearer ${state.user?.token}`,
@@ -78,8 +84,17 @@ const NewPic = () => {
               id="pic"
               onChange={(e) => onImageChange(e)}
             />
-            <button className="btn btn--primary">Post picture</button>
           </label>
+          <label>
+            Picture description:
+            <input
+              className="border border-black/30 w-full p-2 rounded"
+              placeholder="Verbal description of your picture"
+              value={alternate}
+              onChange={(e) => setAlternate(e.target.value)}
+            />
+          </label>
+          <button className="btn btn--primary">Post picture</button>
         </form>
       </div>
     </div>
