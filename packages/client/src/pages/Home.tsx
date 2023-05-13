@@ -23,7 +23,7 @@ const Home = () => {
       <div className="container">
         Home is here.
         <p>{state.user ? `Current user: ${state.user.name}` : "No user"}</p>
-        <ImagesDisplay />
+        <ImagesDisplay images={images} />
       </div>
     </div>
   );
