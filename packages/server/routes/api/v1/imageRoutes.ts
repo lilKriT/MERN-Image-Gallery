@@ -3,12 +3,14 @@ import {
   getImage,
   addImage,
   removeImage,
+  getAllImages,
 } from "../../../controllers/imageController";
 import protect from "../../../middleware/authMiddleware";
 import { upload } from "../../../config/multer";
 
 const imageRoutes = Router();
-imageRoutes.get("/", getImage);
+imageRoutes.get("/", getAllImages);
+imageRoutes.get("/:id", getImage);
 imageRoutes.post("/", protect, upload, addImage);
 imageRoutes.delete("/", protect, removeImage);
 

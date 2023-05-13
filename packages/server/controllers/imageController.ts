@@ -6,7 +6,8 @@ import Image from "../models/Image";
 // @route GET api/v1/image
 // @access Public
 const getImage = expressAsyncHandler(async (req: Request, res: Response) => {
-  res.status(200).json({ msg: "Getting image" });
+  const { id } = req.params;
+  res.status(200).json({ msg: `Getting image: ${id}` });
 });
 
 // @desc Get All Images
@@ -14,7 +15,8 @@ const getImage = expressAsyncHandler(async (req: Request, res: Response) => {
 // @access Public
 const getAllImages = expressAsyncHandler(
   async (req: Request, res: Response) => {
-    res.status(200).json({ msg: "All the images!" });
+    const images = await Image.find();
+    res.status(200).json(images);
   }
 );
 
@@ -26,8 +28,6 @@ const addImage = expressAsyncHandler(async (req: Request, res: Response) => {
     res.status(400);
     throw new Error("Please send a valid image");
   }
-
-  // console.log(req.body);
 
   const image = await Image.create({
     owner: req.body.user,
@@ -50,4 +50,4 @@ const deleteImage = expressAsyncHandler(async (req: Request, res: Response) => {
   res.status(200).json({ msg: "Removing image" });
 });
 
-export { getImage, addImage, deleteImage as removeImage };
+export { getImage, getAllImages, addImage, deleteImage as removeImage };
