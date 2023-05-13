@@ -9,6 +9,15 @@ const getImage = expressAsyncHandler(async (req: Request, res: Response) => {
   res.status(200).json({ msg: "Getting image" });
 });
 
+// @desc Get All Images
+// @route GET api/v1/allimages
+// @access Public
+const getAllImages = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    res.status(200).json({ msg: "All the images!" });
+  }
+);
+
 // @desc Add Image
 // @route POST api/v1/image
 // @access Private
