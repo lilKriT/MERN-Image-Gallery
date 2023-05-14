@@ -16,7 +16,7 @@ const ImagesDisplay = ({ images }: IImagesDisplay) => {
             <img src={``} alt="" />
             <p>
               heres the image{" "}
-              {`http://localhost:3000/public/images/${image.url}`}
+              <img src={`http://localhost:3000/images/${image.url}`} alt="" />
             </p>
           </div>
         ))}

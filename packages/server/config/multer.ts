@@ -3,7 +3,10 @@ import multer from "multer";
 const storageEngine = multer.diskStorage({
   destination: "./public/images", // Is this correct still?
   filename: (req, file, cb) => {
-    cb(null, `${file.originalname}`);
+    cb(
+      null,
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+    );
   },
 });
 

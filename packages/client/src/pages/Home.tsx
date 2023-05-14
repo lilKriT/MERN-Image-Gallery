@@ -23,7 +23,6 @@ const Home = () => {
       <div className="container">
         Home is here.
         <p>{state.user ? `Current user: ${state.user.name}` : "No user"}</p>
-        <img src={`http://localhost:3000/images/60886df68ce1e.jpeg`} alt="" />
         <ImagesDisplay images={images} />
       </div>
     </div>
