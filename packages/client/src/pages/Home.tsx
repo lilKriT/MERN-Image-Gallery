@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchImages = async () => {
       const res = await axios.get(`${url}/images`);
-      console.log(res.data);
+      // console.log(res.data);
       setImages(res.data);
     };
     fetchImages();

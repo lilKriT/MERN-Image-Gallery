@@ -1,5 +1,5 @@
-import React from "react";
 import IImage from "../interfaces/IImage";
+import ImageCard from "./ImageCard";
 
 interface IImagesDisplay {
   images: IImage[];
@@ -7,21 +7,14 @@ interface IImagesDisplay {
 
 const ImagesDisplay = ({ images }: IImagesDisplay) => {
   return (
-    <div>
+    <section>
       <h2>Images:</h2>
-      <div className="bg-slate-200">
+      <div className="bg-slate-200 flex flex-wrap">
         {images.map((image, idx) => (
-          <div>
-            {image.url}
-            <img src={``} alt="" />
-            <p>
-              heres the image{" "}
-              <img src={`http://localhost:3000/images/${image.url}`} alt="" />
-            </p>
-          </div>
+          <ImageCard image={image} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
