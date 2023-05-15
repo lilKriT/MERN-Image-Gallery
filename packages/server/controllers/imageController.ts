@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import Image from "../models/Image";
-import User from "../models/User";
+import path from "path";
+import fs from "fs";
 
 // @desc Get Image
 // @route GET api/v1/image
@@ -49,21 +50,48 @@ const addImage = expressAsyncHandler(async (req: Request, res: Response) => {
 // @access Private
 const deleteImage = expressAsyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-
-  // console.log(req.body.user);
-
   const image = await Image.findById(id);
 
-  // console.log(image);
+  if (!image) {
+    res.status(400);
+    throw new Error("Image not found");
+  }
 
-  res
-    .status(200)
-    .json({
-      msg: "Removing image",
-      imageID: id,
-      loggedUser: req.body.user,
-      iamge: image,
-    });
+  if (!req.body.user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
+  const ownerID = String(image.owner);
+  const userID = req.body.user.id;
+
+  if (userID !== ownerID) {
+    res.status(400);
+    throw new Error("User not authorized");
+  }
+
+  await image.deleteOne();
+
+  const imagePath = path.join(
+    __dirname,
+    "..",
+    "..",
+    "public",
+    "images",
+    image.url
+  );
+
+  fs.unlink(imagePath, (err) => {
+    if (err) {
+      res.status(400);
+      throw err;
+    }
+    console.log("Image deleted");
+  });
+
+  res.status(200).json({
+    id,
+  });
 });
 
 export { getImage, getAllImages, addImage, deleteImage as removeImage };

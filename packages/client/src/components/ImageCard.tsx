@@ -21,6 +21,18 @@ const ImageCard = ({ image }: IImageCard) => {
     getAuthor();
   }, []);
 
+  const handleDelete = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${state.user?.token}`,
+      };
+
+      const res = await axios.delete(`${url}/images/${image._id}`, { headers });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="w-1/3">
       <img
@@ -33,7 +45,9 @@ const ImageCard = ({ image }: IImageCard) => {
       <p>{authorName}</p>
       <p>{new Date(image.createdAt).toDateString()}</p>
       {image.owner === state.user?._id && (
-        <button className="btn btn--primary">Delete</button>
+        <button className="btn btn--primary" onClick={handleDelete}>
+          Delete
+        </button>
       )}
     </div>
   );
