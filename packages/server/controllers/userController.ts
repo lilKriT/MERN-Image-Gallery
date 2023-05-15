@@ -87,8 +87,24 @@ const getMe = expressAsyncHandler(async (req: Request, res: Response) => {
   res.status(200).json({ id, name, email });
 });
 
+// @desc Get user name
+// @route GET api/v1/users/name/:id
+// @access Public
+const getName = expressAsyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
+  const { name } = user;
+  res.status(200).json({ name });
+});
+
 const generateToken = (id: string) => {
   return jwt.sign({ id }, process.env.SECRET as string, { expiresIn: "30d" });
 };
 
-export { registerUser, loginUser, getMe };
+export { registerUser, loginUser, getMe, getName };

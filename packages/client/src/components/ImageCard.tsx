@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import IImage from "../interfaces/IImage";
 import { AppContext } from "../context/AppContext";
+import axios from "axios";
+
+const url = "http://localhost:3000/api/v1";
 
 interface IImageCard {
   image: IImage;
@@ -8,10 +11,12 @@ interface IImageCard {
 
 const ImageCard = ({ image }: IImageCard) => {
   const { state } = useContext(AppContext);
+  const [authorName, setAuthorName] = useState("");
 
   useEffect(() => {
     const getAuthor = async () => {
-      // const res = axios.get
+      const res = await axios.get(`${url}/users/name/${image.owner}`);
+      setAuthorName(res.data.name);
     };
     getAuthor();
   }, []);
@@ -25,9 +30,7 @@ const ImageCard = ({ image }: IImageCard) => {
       />
       <h3>{image.alt}</h3>
       {}
-      <p>
-        {image.owner} and {state.user?._id}
-      </p>
+      <p>{authorName}</p>
       <p>{new Date(image.createdAt).toDateString()}</p>
       {image.owner === state.user?._id && (
         <button className="btn btn--primary">Delete</button>
