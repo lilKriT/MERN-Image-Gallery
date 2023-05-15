@@ -12,6 +12,6 @@ const imageRoutes = Router();
 imageRoutes.get("/", getAllImages);
 imageRoutes.get("/:id", getImage);
 imageRoutes.post("/", protect, upload, addImage);
-imageRoutes.delete("/", protect, removeImage);
+imageRoutes.delete("/:id", protect, removeImage);
 
 export default imageRoutes;

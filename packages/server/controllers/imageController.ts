@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import Image from "../models/Image";
+import User from "../models/User";
 
 // @desc Get Image
 // @route GET api/v1/image
@@ -47,7 +48,22 @@ const addImage = expressAsyncHandler(async (req: Request, res: Response) => {
 // @route DELETE api/v1/image
 // @access Private
 const deleteImage = expressAsyncHandler(async (req: Request, res: Response) => {
-  res.status(200).json({ msg: "Removing image" });
+  const { id } = req.params;
+
+  // console.log(req.body.user);
+
+  const image = await Image.findById(id);
+
+  // console.log(image);
+
+  res
+    .status(200)
+    .json({
+      msg: "Removing image",
+      imageID: id,
+      loggedUser: req.body.user,
+      iamge: image,
+    });
 });
 
 export { getImage, getAllImages, addImage, deleteImage as removeImage };
