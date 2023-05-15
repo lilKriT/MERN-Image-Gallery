@@ -28,6 +28,7 @@ const ImageCard = ({ image }: IImageCard) => {
       <p>
         {image.owner} and {state.user?._id}
       </p>
+      <p>{new Date(image.createdAt).toDateString()}</p>
       {image.owner === state.user?._id && (
         <button className="btn btn--primary">Delete</button>
       )}
