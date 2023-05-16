@@ -3,15 +3,16 @@ import ImageCard from "./ImageCard";
 
 interface IImagesDisplay {
   images: IImage[];
+  removeImage: (image: IImage) => void;
 }
 
-const ImagesDisplay = ({ images }: IImagesDisplay) => {
+const ImagesDisplay = ({ images, removeImage }: IImagesDisplay) => {
   return (
     <section>
       <h2>Images:</h2>
       <div className="bg-slate-200 flex flex-wrap">
         {images.map((image, idx) => (
-          <ImageCard image={image} />
+          <ImageCard image={image} removeImage={removeImage} />
         ))}
       </div>
     </section>

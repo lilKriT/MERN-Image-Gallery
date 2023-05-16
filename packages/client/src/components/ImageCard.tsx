@@ -7,9 +7,10 @@ const url = "http://localhost:3000/api/v1";
 
 interface IImageCard {
   image: IImage;
+  removeImage: (image: IImage) => void;
 }
 
-const ImageCard = ({ image }: IImageCard) => {
+const ImageCard = ({ image, removeImage }: IImageCard) => {
   const { state } = useContext(AppContext);
   const [authorName, setAuthorName] = useState("");
 
@@ -45,7 +46,7 @@ const ImageCard = ({ image }: IImageCard) => {
       <p>{authorName}</p>
       <p>{new Date(image.createdAt).toDateString()}</p>
       {image.owner === state.user?._id && (
-        <button className="btn btn--primary" onClick={handleDelete}>
+        <button className="btn btn--primary" onClick={() => removeImage(image)}>
           Delete
         </button>
       )}

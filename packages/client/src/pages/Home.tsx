@@ -2,12 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import ImagesDisplay from "../components/ImagesDisplay";
+import IImage from "../interfaces/IImage";
 
 const url = "http://localhost:3000/api/v1";
 
 const Home = () => {
   const { state } = useContext(AppContext);
   const [images, setImages] = useState([]);
+
+  const removeImage = (image: IImage) => {
+    console.log("Removing image");
+  };
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -23,7 +28,7 @@ const Home = () => {
       <div className="container">
         Home is here.
         <p>{state.user ? `Current user: ${state.user.name}` : "No user"}</p>
-        <ImagesDisplay images={images} />
+        <ImagesDisplay images={images} removeImage={removeImage} />
       </div>
     </div>
   );
