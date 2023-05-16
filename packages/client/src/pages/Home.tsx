@@ -8,16 +8,16 @@ const url = "http://localhost:3000/api/v1";
 
 const Home = () => {
   const { state } = useContext(AppContext);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<IImage[]>([]);
 
   const removeImage = (image: IImage) => {
-    console.log("Removing image");
+    const newImages = images.filter((img) => img !== image);
+    setImages(newImages);
   };
 
   useEffect(() => {
     const fetchImages = async () => {
       const res = await axios.get(`${url}/images`);
-      // console.log(res.data);
       setImages(res.data);
     };
     fetchImages();
