@@ -22,18 +22,6 @@ const ImageCard = ({ image, removeImage }: IImageCard) => {
     getAuthor();
   }, []);
 
-  const handleDelete = async () => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${state.user?.token}`,
-      };
-
-      const res = await axios.delete(`${url}/images/${image._id}`, { headers });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <div className="w-1/3">
       <img

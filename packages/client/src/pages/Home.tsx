@@ -10,7 +10,17 @@ const Home = () => {
   const { state } = useContext(AppContext);
   const [images, setImages] = useState<IImage[]>([]);
 
-  const removeImage = (image: IImage) => {
+  const removeImage = async (image: IImage) => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${state.user?.token}`,
+      };
+
+      const res = await axios.delete(`${url}/images/${image._id}`, { headers });
+    } catch (err) {
+      console.log(err);
+    }
+
     const newImages = images.filter((img) => img !== image);
     setImages(newImages);
   };
