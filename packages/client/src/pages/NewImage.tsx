@@ -1,15 +1,18 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const url = "http://localhost:3000/api/v1";
 
-const NewPic = () => {
+const NewImage = () => {
   const [previewImage, setPreviewImage] = useState<string>("");
   const [file, setFile] = useState<File | null>();
   const [alternate, setAlternate] = useState("");
 
   const { state, dispatch } = useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -48,6 +51,8 @@ const NewPic = () => {
       const res = await axios.post(`${url}/images/`, formData, {
         headers,
       });
+
+      navigate("/");
     } catch (error) {}
   };
 
@@ -101,4 +106,4 @@ const NewPic = () => {
   );
 };
 
-export default NewPic;
+export default NewImage;
